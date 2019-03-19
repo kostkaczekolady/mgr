@@ -18,8 +18,8 @@ time = np.arange(0, len(audio)) / sfreq
 print(time)
 print('***********************************')
 
-def readExamples(path):
-    y, sr = lr.load(path+"/cello_1.mp3", duration=10)
+def readsingleExamples(path, filename):
+    y, sr = lr.load(path+filename, duration=1.5)
     mfccs = librosa.feature.mfcc(y=y, sr=sr)
     newMFCSS = np.resize(mfccs, (mfccs.size))
     hop_length = 512
@@ -30,13 +30,23 @@ def readExamples(path):
     newVector = np.concatenate((newMFCSS, newSFTreal), axis=0)
     return newVector
 
-# example_audio_file =
+def readExamples():
+    music_files = glob('./baza' + '/*.mp3')
+    new_music_files = []
+    list_samples = []
+    print(music_files)
+    for x in music_files:
+        new_music_files.append(x[7:])
+    print(new_music_files)
+    for x in new_music_files:
+        list_samples.append(readsingleExamples('./baza/', x))
+    matrix_extration = np.array(list_samples)
+    return matrix_extration
 
-featureVector = readExamples('./baza')
+matrix_extration = readExamples()
 
-
-pca = PCA(n_components=10)
-pcaArray = pca.fit_transform(featureVector)
+pca = PCA(n_components=8)
+pcaArray = pca.fit_transform(matrix_extration)
 print(pcaArray)
 
 
