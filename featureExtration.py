@@ -15,6 +15,9 @@ def normalize(y):
     y = y / norma
     return y
 
+# def delete_silence():
+
+
 
 def visualization(y, sr, xlabel, ylabel, title):
     plt.rcParams['figure.figsize'] = (14, 4)
@@ -24,37 +27,37 @@ def visualization(y, sr, xlabel, ylabel, title):
     plt.title(title)
     plt.show()
 
-def readSingleExamples(path, filename):
+def read_single_sxamples(path, filename):
     y, sr = lr.load(path+filename, duration=0.5)
     y = normalize(y)
     mfccs = librosa.feature.mfcc(y=y, sr=sr)
-    newMFCSS = np.resize(mfccs, (mfccs.size))
+    new_mfccs = np.resize(mfccs, (mfccs.size))
     hop_length = 512
     n_fft = 2048
     sfft = librosa.stft(y, n_fft=n_fft, hop_length=hop_length)
-    newSFT = np.resize(sfft, (sfft.size))
-    newSFTreal = newSFT.real
-    newVector = np.concatenate((newMFCSS, newSFTreal), axis=0)
-    # print(newVector.shape)
+    new_sfft = np.resize(sfft, (sfft.size))
+    new_sfft_realreal = new_sfft.real
+    vector_mfccs_sfft = np.concatenate((new_mfccs, new_sfft_realreal), axis=0)
+    # print(vector_mfccs_sfft.shape)
     visualization(y, sr, "samples", "amplitude", filename[:-4])
-    return newVector
+    return vector_mfccs_sfft
 
-def readExamples():
-    music_files = glob('./baza' + '/*.mp3')
-    new_music_files = []
+def read_examples():
+    all_music_files = glob('./baza' + '/*.mp3')
+    music_files_names = []
     list_samples = []
-    print(music_files)
-    for x in music_files:
-        new_music_files.append(x[7:])
-    print(new_music_files)
-    for x in new_music_files:
-        list_samples.append(readSingleExamples('./baza/', x))
+    print(all_music_files)
+    for x in all_music_files:
+        music_files_names.append(x[7:])
+    print(music_files_names)
+    for x in music_files_names:
+        list_samples.append(read_single_sxamples('./baza/', x))
     matrix_extration = np.array(list_samples)
     return matrix_extration
 
 
 def pca():
-    matrix_extration = readExamples()
+    matrix_extration = read_examples()
     pca = PCA(n_components=8)
     pcaArray = pca.fit_transform(matrix_extration)
     return pcaArray
