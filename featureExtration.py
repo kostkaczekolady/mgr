@@ -6,7 +6,7 @@ import librosa as lr
 from sklearn.decomposition import PCA
 
 def readsingleExamples(path, filename):
-    y, sr = lr.load(path+filename, duration=1.5)
+    y, sr = lr.load(path+filename, duration=0.5)
     mfccs = librosa.feature.mfcc(y=y, sr=sr)
     newMFCSS = np.resize(mfccs, (mfccs.size))
     hop_length = 512
@@ -15,6 +15,7 @@ def readsingleExamples(path, filename):
     newSFT = np.resize(sfft, (sfft.size))
     newSFTreal = newSFT.real
     newVector = np.concatenate((newMFCSS, newSFTreal), axis=0)
+    # print(newVector.shape)
     return newVector
 
 def readExamples():

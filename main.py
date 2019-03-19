@@ -5,8 +5,8 @@ from sklearn.svm import SVC
 data_dir = './baza'
 audio_files = glob(data_dir + '/*.mp3')
 
-pca_result = pca()
-print(pca_result)
+X = pca()
+print(X)
 
 #cello -> 1 clarinet -> 2 guitar -> 3
 Y = np.array([[1,0,0],
@@ -17,10 +17,25 @@ Y = np.array([[1,0,0],
               [0,1,0],
               [0,0,1],
               [0,0,1],
-              [0,0,1]])
-first_column = (Y[:,0])
-clf = SVC(gamma='auto')
-clf.fit(pca_result, first_column)
+              [0,0,1],
+              [0,0,0],
+              [0,0,0],
+              [0,0,0],
+              [0,0,0],
+              [0,0,0],
+              [0,0,0],
+              [0,0,0]])
+first_column_traing_Y = (Y[:9,0])
+traing_X = X[:9,:]
 
-print("predict", clf.predict(pca_result))
-print("accu", clf.score(pca_result, first_column))
+test_Y = Y[9:,0]
+test_X = X[9:,:]
+print(traing_X.shape)
+
+
+clf = SVC(gamma='auto')
+clf.fit(traing_X, first_column_traing_Y)
+
+print("predict", clf.predict(test_X))
+print("accu", clf.score(test_X, test_Y))
+
