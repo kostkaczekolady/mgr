@@ -1,12 +1,32 @@
-# Feature extraction example
 import numpy as np
 import librosa.display
 from glob import glob
 import librosa as lr
+import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 
-def readsingleExamples(path, filename):
+def normalize(y):
+    max_y = np.amax(y)
+    min_y = np.abs(np.amin(y))
+    if max_y > min_y:
+        norma = max_y
+    else:
+        norma = min_y
+    y = y / norma
+    return y
+
+
+def visualization(y, sr, xlabel, ylabel, title):
+    plt.rcParams['figure.figsize'] = (14, 4)
+    lr.display.waveplot(y, sr=sr)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(title)
+    plt.show()
+
+def readSingleExamples(path, filename):
     y, sr = lr.load(path+filename, duration=0.5)
+    y = normalize(y)
     mfccs = librosa.feature.mfcc(y=y, sr=sr)
     newMFCSS = np.resize(mfccs, (mfccs.size))
     hop_length = 512
@@ -16,6 +36,7 @@ def readsingleExamples(path, filename):
     newSFTreal = newSFT.real
     newVector = np.concatenate((newMFCSS, newSFTreal), axis=0)
     # print(newVector.shape)
+    visualization(y, sr, "samples", "amplitude", filename[:-4])
     return newVector
 
 def readExamples():
@@ -27,7 +48,7 @@ def readExamples():
         new_music_files.append(x[7:])
     print(new_music_files)
     for x in new_music_files:
-        list_samples.append(readsingleExamples('./baza/', x))
+        list_samples.append(readSingleExamples('./baza/', x))
     matrix_extration = np.array(list_samples)
     return matrix_extration
 
@@ -37,5 +58,6 @@ def pca():
     pca = PCA(n_components=8)
     pcaArray = pca.fit_transform(matrix_extration)
     return pcaArray
+
 
 
