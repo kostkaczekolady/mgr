@@ -18,30 +18,25 @@ time = np.arange(0, len(audio)) / sfreq
 print(time)
 print('***********************************')
 
+def readExamples(path):
+    y, sr = lr.load(path+"/cello_1.mp3", duration=10)
+    mfccs = librosa.feature.mfcc(y=y, sr=sr)
+    newMFCSS = np.resize(mfccs, (mfccs.size))
+    hop_length = 512
+    n_fft = 2048
+    sfft = librosa.stft(y, n_fft=n_fft, hop_length=hop_length)
+    newSFT = np.resize(sfft, (sfft.size))
+    newSFTreal = newSFT.real
+    newVector = np.concatenate((newMFCSS, newSFTreal), axis=0)
+    return newVector
+
 # example_audio_file =
 
-y, sr = lr.load('baza/cello_1.mp3', duration=10)
-plt.figure()
-plt.subplot(3, 1, 1)
-librosa.display.waveplot(y, sr=sr)
-plt.title('cello_1.mp3')
+featureVector = readExamples('./baza')
 
 
-y, sr = librosa.load(librosa.util.example_audio_file(), offset=30, duration=5)
-mfccs = librosa.feature.mfcc(y=y, sr=sr)
-print("MFC:", mfccs.shape)
-newMFCSS = np.resize(mfccs,(mfccs.size))
-print("newMfcss", newMFCSS)
-
-fft = librosa.fft_frequencies(sr=22050, n_fft=20)
-print('***FFT***')
-print(type(fft))
-print(fft)
-
-newVector = np.concatenate((newMFCSS, fft), axis=0)
-print("vector", newVector)
 pca = PCA(n_components=10)
-pcaArray = pca.fit_transform(newVector)
+pcaArray = pca.fit_transform(featureVector)
 print(pcaArray)
 
 
