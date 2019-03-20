@@ -15,9 +15,9 @@ def normalize(y):
     y = y / norma
     return y
 
+# def change_format():
+
 # def delete_silence():
-
-
 
 def visualization(y, sr, xlabel, ylabel, title):
     plt.rcParams['figure.figsize'] = (14, 4)
@@ -46,10 +46,10 @@ def read_examples():
     all_music_files = glob('./baza' + '/*.mp3')
     music_files_names = []
     list_samples = []
-    print(all_music_files)
+    # print(all_music_files)
     for x in all_music_files:
         music_files_names.append(x[7:])
-    print(music_files_names)
+    # print(music_files_names)
     for x in music_files_names:
         list_samples.append(read_single_sxamples('./baza/', x))
     matrix_extration = np.array(list_samples)
