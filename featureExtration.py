@@ -2,7 +2,7 @@ import numpy as np
 import librosa.display
 from glob import glob
 import librosa as lr
-# from pydub import AudioSegment
+from pydub import AudioSegment
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 
@@ -16,13 +16,17 @@ def normalize(y):
     y = y / norma
     return y
 
-# def change_format():
-#     files = glob('./baza' + '/*.mp3')
-#     for f in files:
-#         print('Converting files')
-#         sound = AudioSegment.from_mp3("%s" % f)
-#         sound.export("./baza_2/%s.wav" % f.split('.')[0], format="wav")
-# # def delete_silence():
+# def delete_silence():
+#
+# def convert_mp3_to_wav():
+#
+#     files = [f for f in listdir('./baza') if isfile(join('mp3/', f))]
+#     for file in files:
+#         print('Converting %s' % file)
+#         sound = AudioSegment.from_mp3("mp3/%s" % file)
+#         sound.export("wav/%s.wav" % file.split('.')[0], format="wav")
+
+
 
 def visualization(y, sr, xlabel, ylabel, title):
     plt.rcParams['figure.figsize'] = (14, 4)
@@ -38,27 +42,27 @@ def read_single_sxamples(path, filename):
     fs = 44100
     hop_length = 512
     n_fft = 2048
-    n_mels=128
+    n_mels = 128
 
-    mfccs = librosa.feature.mfcc(y=y, sr=fs)
+    mfccs = librosa.feature.mfcc(y=y, sr=sr)
     new_mfccs = np.resize(mfccs, (mfccs.size))
+
     sfft = librosa.stft(y, n_fft=n_fft, hop_length=hop_length)
     new_sfft = np.resize(sfft, (sfft.size))
-    new_sfft_real = new_sfft.real
-    vector_mfccs_sfft = np.concatenate((new_mfccs, new_sfft_real), axis=0)
+    new_sfft_realreal = new_sfft.real
+    vector_mfccs_sfft = np.concatenate((new_mfccs, new_sfft_realreal), axis=0)
     # print(vector_mfccs_sfft.shape)
     # visualization(y, sr, "samples", "amplitude", filename[:-4])
     return vector_mfccs_sfft
 
 def read_examples():
-    # change_format()
-    all_music_files = glob('./baza' + '/*.wav')
+    all_music_files = glob('./baza' + '/*.mp3')
     music_files_names = []
     list_samples = []
-    # print(all_music_files)
+    print(all_music_files)
     for x in all_music_files:
         music_files_names.append(x[7:])
-    # print(music_files_names)
+    print(music_files_names)
     for x in music_files_names:
         list_samples.append(read_single_sxamples('./baza/', x))
     matrix_extration = np.array(list_samples)
@@ -70,6 +74,3 @@ def pca():
     pca = PCA(n_components=8)
     pcaArray = pca.fit_transform(matrix_extration)
     return pcaArray
-
-
-
