@@ -2,6 +2,7 @@ import numpy as np
 import librosa.display
 from glob import glob
 import librosa as lr
+# from pydub import AudioSegment
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 
@@ -16,8 +17,12 @@ def normalize(y):
     return y
 
 # def change_format():
-
-# def delete_silence():
+#     files = glob('./baza' + '/*.mp3')
+#     for f in files:
+#         print('Converting files')
+#         sound = AudioSegment.from_mp3("%s" % f)
+#         sound.export("./baza_2/%s.wav" % f.split('.')[0], format="wav")
+# # def delete_silence():
 
 def visualization(y, sr, xlabel, ylabel, title):
     plt.rcParams['figure.figsize'] = (14, 4)
@@ -30,20 +35,24 @@ def visualization(y, sr, xlabel, ylabel, title):
 def read_single_sxamples(path, filename):
     y, sr = lr.load(path+filename, duration=0.5)
     y = normalize(y)
-    mfccs = librosa.feature.mfcc(y=y, sr=sr)
-    new_mfccs = np.resize(mfccs, (mfccs.size))
+    fs = 44100
     hop_length = 512
     n_fft = 2048
+    n_mels=128
+
+    mfccs = librosa.feature.mfcc(y=y, sr=fs)
+    new_mfccs = np.resize(mfccs, (mfccs.size))
     sfft = librosa.stft(y, n_fft=n_fft, hop_length=hop_length)
     new_sfft = np.resize(sfft, (sfft.size))
-    new_sfft_realreal = new_sfft.real
-    vector_mfccs_sfft = np.concatenate((new_mfccs, new_sfft_realreal), axis=0)
+    new_sfft_real = new_sfft.real
+    vector_mfccs_sfft = np.concatenate((new_mfccs, new_sfft_real), axis=0)
     # print(vector_mfccs_sfft.shape)
-    visualization(y, sr, "samples", "amplitude", filename[:-4])
+    # visualization(y, sr, "samples", "amplitude", filename[:-4])
     return vector_mfccs_sfft
 
 def read_examples():
-    all_music_files = glob('./baza' + '/*.mp3')
+    # change_format()
+    all_music_files = glob('./baza' + '/*.wav')
     music_files_names = []
     list_samples = []
     # print(all_music_files)
