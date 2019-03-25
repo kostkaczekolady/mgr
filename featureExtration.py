@@ -26,43 +26,37 @@ def normalize(y):
 #         sound = AudioSegment.from_mp3("mp3/%s" % file)
 #         sound.export("wav/%s.wav" % file.split('.')[0], format="wav")
 
-
-
 def visualization(y, sr, xlabel, ylabel, title):
     plt.rcParams['figure.figsize'] = (14, 4)
     lr.display.waveplot(y, sr=sr)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)
-    plt.show()
+    # plt.show()
 
 def read_single_sxamples(path, filename):
     y, sr = lr.load(path+filename, duration=0.5)
     y = normalize(y)
-    fs = 44100
-    hop_length = 512
-    n_fft = 2048
-    n_mels = 128
-
     mfccs = librosa.feature.mfcc(y=y, sr=sr)
     new_mfccs = np.resize(mfccs, (mfccs.size))
-
+    hop_length = 512
+    n_fft = 2048
     sfft = librosa.stft(y, n_fft=n_fft, hop_length=hop_length)
     new_sfft = np.resize(sfft, (sfft.size))
     new_sfft_realreal = new_sfft.real
     vector_mfccs_sfft = np.concatenate((new_mfccs, new_sfft_realreal), axis=0)
     # print(vector_mfccs_sfft.shape)
-    # visualization(y, sr, "samples", "amplitude", filename[:-4])
+    visualization(y, sr, "samples", "amplitude", filename[:-4])
     return vector_mfccs_sfft
 
 def read_examples():
     all_music_files = glob('./baza' + '/*.mp3')
     music_files_names = []
     list_samples = []
-    print(all_music_files)
+    # print(all_music_files)
     for x in all_music_files:
         music_files_names.append(x[7:])
-    print(music_files_names)
+    # print(music_files_names)
     for x in music_files_names:
         list_samples.append(read_single_sxamples('./baza/', x))
     matrix_extration = np.array(list_samples)
