@@ -50,15 +50,15 @@ def read_single_sxamples(path, filename):
     return vector_mfccs_sfft
 
 def read_examples():
-    all_music_files = glob('./baza' + '/*.mp3')
+    all_music_files = glob('./smalldataset' + '/*.mp3')
     music_files_names = []
     list_samples = []
     # print(all_music_files)
     for x in all_music_files:
-        music_files_names.append(x[7:])
+        music_files_names.append(x[15:])
     # print(music_files_names)
     for x in music_files_names:
-        list_samples.append(read_single_sxamples('./baza/', x))
+        list_samples.append(read_single_sxamples('./smalldataset/', x))
     matrix_extration = np.array(list_samples)
     return matrix_extration
 
