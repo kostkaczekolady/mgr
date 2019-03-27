@@ -48,16 +48,7 @@ print(X)
 #oboe -> 0 clarinet -> 1 guitar -> 2 viola ->3
 #cello 1 clarnet01,guitar 001, cello+clarnet 0001 cello+guitar 00001, clarnet+guitar 000001 cello+clarnet+gyitar 0000001
 
-Y = np.array([[1,0,0,0,0],
-              [0,1,1],
-              [0,1,1],
-              [0,1,1],
-              [0,1,1],
-              [0,1,1],
-              [0,1,1],
-              [0,1,1],
-              [0,1,1],
-              [0,1,1]])
+# Y = np.array([
 
 #trenujemy dla cello
 first_column_traing_Y = (Y[:18,0])
