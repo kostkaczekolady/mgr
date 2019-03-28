@@ -10,7 +10,7 @@ files = []
 for root, dirnames, filenames in os.walk(path):
     for filename in fnmatch.filter(filenames, '*.mp3'):
         files.append(os.path.join(root, filename))
-print("pliki:", files)
+# print("pliki:", files)
 
 cello_1 = AudioSegment.from_file("./baza/cello_1.mp3")
 cello_2 = AudioSegment.from_file("./baza/cello_2.mp3")

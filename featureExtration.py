@@ -35,7 +35,7 @@ def visualization(y, sr, xlabel, ylabel, title):
     # plt.show()
 
 def read_single_sxamples(path, filename):
-    y, sr = lr.load(path+filename, duration=0.5)
+    y, sr = lr.load(path+filename, duration=0.3)
     y = normalize(y)
     mfccs = librosa.feature.mfcc(y=y, sr=sr)
     new_mfccs = np.resize(mfccs, (mfccs.size))
@@ -45,26 +45,29 @@ def read_single_sxamples(path, filename):
     new_sfft = np.resize(sfft, (sfft.size))
     new_sfft_realreal = new_sfft.real
     vector_mfccs_sfft = np.concatenate((new_mfccs, new_sfft_realreal), axis=0)
-    # print(vector_mfccs_sfft.shape)
-    visualization(y, sr, "samples", "amplitude", filename[:-4])
+    # print("rozmiar vectora: ", vector_mfccs_sfft.shape)
+    # visualization(y, sr, "samples", "amplitude", filename[:-4])
+    # print("vector: ", vector_mfccs_sfft)
     return vector_mfccs_sfft
 
 def read_examples():
     all_music_files = glob('./smalldataset' + '/*.mp3')
     music_files_names = []
     list_samples = []
-    # print(all_music_files)
+    # print("Wszystkie pliki w ./smalldataset:", all_music_files)
     for x in all_music_files:
         music_files_names.append(x[15:])
-    # print(music_files_names)
+    print("Wszystkie pliki w ./smalldataset:", music_files_names)
     for x in music_files_names:
         list_samples.append(read_single_sxamples('./smalldataset/', x))
+        print("tablica pojedynczych plików:", list_samples)
     matrix_extration = np.array(list_samples)
+    print("macierz:", matrix_extration)
     return matrix_extration
-
 
 def pca():
     matrix_extration = read_examples()
-    pca = PCA(n_components=8)
+    pca = PCA(n_components=2)
     pcaArray = pca.fit_transform(matrix_extration)
+    print (pcaArray)
     return pcaArray
