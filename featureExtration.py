@@ -60,14 +60,14 @@ def read_examples():
     print("Wszystkie pliki w ./smalldataset:", music_files_names)
     for x in music_files_names:
         list_samples.append(read_single_sxamples('./smalldataset/', x))
-        print("tablica pojedynczych plików:", list_samples)
+        print("vector:", list_samples)
     matrix_extration = np.array(list_samples)
     print("macierz:", matrix_extration)
     return matrix_extration
 
 def pca():
     matrix_extration = read_examples()
-    pca = PCA(n_components=2)
+    pca = PCA(n_components=10)
     pcaArray = pca.fit_transform(matrix_extration)
     print (pcaArray)
     return pcaArray
