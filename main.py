@@ -6,7 +6,7 @@ data_dir = './baza'
 audio_files = glob(data_dir + '/*.mp3')
 
 X = pca()
-print(X)
+print("X:", X)
 
 #cello -> 1 clarinet -> 2 guitar -> 3
 Y = np.array([[1,0,0],
@@ -30,7 +30,7 @@ traing_X = X[:9,:]
 
 test_Y = Y[9:,0]
 test_X = X[9:,:]
-print(traing_X.shape)
+print("Rozmiar:",traing_X.shape)
 
 
 clf = SVC(gamma='auto')

@@ -25,7 +25,7 @@ def visualization(y, sr, xlabel, ylabel, title):
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)
-    plt.show()
+    # plt.show()
 
 def read_single_sxamples(path, filename):
     y, sr = lr.load(path+filename, duration=0.5)
@@ -58,7 +58,7 @@ def read_examples():
 
 def pca():
     matrix_extration = read_examples()
-    pca = PCA(n_components=8)
+    pca = PCA(n_components=15)
     pcaArray = pca.fit_transform(matrix_extration)
     return pcaArray
 
