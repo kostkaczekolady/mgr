@@ -2,7 +2,10 @@ from glob import glob
 from featureExtration import *
 from instrumentsCoding import *
 from sklearn.svm import SVC
+from sklearn.metrics import balanced_accuracy_score
 # from sklearn.preprocessing import OneHotEncoder
+# Wczytywanie zbiorow
+read_examples()
 
 data_dir = './smalldataset'
 audio_files = glob(data_dir + '/*.mp3')
@@ -14,20 +17,26 @@ Y = np.array(data)
 
 
 #trenujemy dla guitar
-guitar_Y = (Y[20:, 0])
+guitar_traing_Y = (Y[20:, 0])
 guitar_traing_X = X[20:,:]
 
-guitar_test_Y = Y[20:,0]
-guitar_test_X = X[20:,:]
-print(guitar_traing_X.shape)
+guitar_test_Y = Y[:20,0]
+guitar_test_X = X[:20,:]
+print(guitar_traing_X.shape, guitar_test_X.shape)
 
 
-clf = SVC(gamma='auto')
-clf.fit(guitar_traing_X, guitar_Y)
+clf = SVC(gamma='auto', probability=True)
+clf.fit(guitar_traing_X, guitar_traing_Y)
 
-print("predict", clf.predict(guitar_test_X))
-print("accuracy dla guitar", clf.score(guitar_test_X, guitar_test_Y))
+y_pred = clf.predict(guitar_test_X)
+y_pp = clf.predict_proba(guitar_test_X)
+print("predict", y_pred)
+#print("accuracy dla guitar", clf.score(guitar_test_X, guitar_test_Y))
 
+score = balanced_accuracy_score(guitar_test_Y, y_pred)
+print(list(zip(y_pp, guitar_test_Y)))
+print("%.3f" % score)
+exit()
 
 #trenujemy dla viola
 viola_Y = (Y[50:, 1])
@@ -45,11 +54,11 @@ print(viola_traing_X.shape)
 # print("accuracy dla viola", clf.score(viola_test_X, viola_test_Y))
 
 #trenujemy dla cello
-cello_Y = (Y[:50,2])
-cello_traing_X = X[:50,:]
+cello_Y = (Y[:90, 2])
+cello_traing_X = X[:90,:]
 
-cello_test_Y = Y[50:,2]
-cello_test_X = X[50:,:]
+cello_test_Y = Y[90:,2]
+cello_test_X = X[90:,:]
 print(cello_traing_X.shape)
 
 
@@ -106,10 +115,10 @@ print("accuracy dla cello_viola", clf.score(cello_viola_test_X, cello_viola_test
 
 #trenujemy dla cello+viola+triangle
 cello_viola_triangle_Y = (Y[:50, 12])
-cello_viola_triangle_traing_X = X[:50,:]
+cello_viola_triangle_traing_X = X[:50, :]
 
-cello_viola_triangle_test_Y = Y[50:,12]
-cello_viola_triangle_test_X = X[50:,:]
+cello_viola_triangle_test_Y = Y[50:, 12]
+cello_viola_triangle_test_X = X[50:, :]
 print(cello_viola_triangle_traing_X.shape)
 
 clf = SVC(gamma='auto')

@@ -38,17 +38,27 @@ cello_3_viola_1 = AudioSegment.from_file("./smalldataset/cello_2_viola_1.mp3")
 clarinet_1_guitar_2 = AudioSegment.from_file("./smalldataset/clarinet_1_guitar_2.mp3")
 
 triangle_1 = AudioSegment.from_file("./baza2/triangle_1.mp3")
+triangle_2 = AudioSegment.from_file("./baza2/triangle_2.mp3")
 
 cello_1_clarinet_1_triangle_1 = cello_1_clarinet_1.overlay(triangle_1)
 cello_2_viola_1_triangle_1 = cello_2_viola_1.overlay(triangle_1)
 cello_1_viola_1_triangle_1 = cello_1_viola_1.overlay(triangle_1)
 cello_3_viola_1_triangle_1 = cello_3_viola_1.overlay(triangle_1)
 clarinet_1_guitar_2_triangle_1 = clarinet_1_guitar_2.overlay(triangle_1)
+cello_1_clarinet_1_triangle_2 = cello_1_clarinet_1.overlay(triangle_2)
+cello_2_viola_1_triangle_2 = cello_2_viola_1.overlay(triangle_2)
+cello_1_viola_1_triangle_2 = cello_1_viola_1.overlay(triangle_2)
+cello_3_viola_1_triangle_2 = cello_3_viola_1.overlay(triangle_2)
+clarinet_1_guitar_2_triangle_2 = clarinet_1_guitar_2.overlay(triangle_2)
 
 
 cello_1_clarinet_1_triangle_1.export("./smalldataset/cello_1_clarinet_1_triangle_1.mp3", format='mp3')
 cello_2_viola_1_triangle_1.export("./smalldataset/cello_2_viola_1_triangle_1.mp3", format='mp3')
 cello_1_viola_1_triangle_1.export("./smalldataset/cello_1_viola_1_triangle_1.mp3", format='mp3')
 cello_3_viola_1_triangle_1.export("./smalldataset/cello_3_viola_1_triangle_1.mp3", format='mp3')
+cello_1_clarinet_1_triangle_2.export("./smalldataset/cello_1_clarinet_1_triangle_2.mp3", format='mp3')
+cello_2_viola_1_triangle_2.export("./smalldataset/cello_2_viola_1_triangle_2.mp3", format='mp3')
+cello_1_viola_1_triangle_2.export("./smalldataset/cello_1_viola_1_triangle_2.mp3", format='mp3')
+cello_3_viola_1_triangle_2.export("./smalldataset/cello_3_viola_1_triangle_2.mp3", format='mp3')
 # clarinet_1_guitar_2_triangle_1.export("./smalldataset/clarinet_1_guitar_2_triangle_1.mp3", format='mp3')
 

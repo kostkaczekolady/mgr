@@ -62,7 +62,6 @@ def read_examples():
     return matrix_extration
 
 
-read_examples()
 
 def pca():
     matrix_extration = read_examples()
