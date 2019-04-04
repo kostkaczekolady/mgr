@@ -1,19 +1,9 @@
-from glob import glob
-from featureExtration import *
-from instrumentsCoding import *
+import numpy as np
 from sklearn.svm import SVC
 from sklearn.metrics import balanced_accuracy_score
-# from sklearn.preprocessing import OneHotEncoder
-# Wczytywanie zbiorow
-read_examples()
 
-data_dir = './smalldataset'
-audio_files = glob(data_dir + '/*.mp3')
-
-X = pca()
-Y = np.array(data)
-
-#cello clarinet01,guitar 001, cello+clarinet 0001 cello+guitar 00001, clarinet+guitar 000001 cello+clarinet+gyitar 0000001
+X = np.load("inputs.npy")
+Y = np.load("labels.npy")
 
 
 #trenujemy dla guitar
