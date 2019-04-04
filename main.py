@@ -10,6 +10,7 @@ Y = Y.flatten()
 
 skf= StratifiedKFold(n_splits=10)
 #tworzenie klasyfikatora
+
 clf = SVC(gamma='auto', probability=True)
 
 acc = []

@@ -3,31 +3,40 @@ from sklearn.svm import SVC
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import balanced_accuracy_score
 
+
 X = np.load("inputs.npy")
 Y = np.load("labels.npy")
 Y = Y.flatten()
 
 
-skf= StratifiedKFold(n_splits=10)
-#tworzenie klasyfikatora
-clf = SVC(gamma='auto', probability=True)
-
-acc = []
-for train_index, test_index in skf.split(X, Y):
-    X_train, X_test =X[train_index], X[test_index]
-    Y_train, Y_test =Y[train_index], Y[test_index]
+def train_and_evaluate (X_train, Y_train):
     #trenuje
     clf.fit(X_train, Y_train)
     #jak klasyfikator dziala na zbiorze testowym
     y_pred = clf.predict(X_test)
     y_pp = clf.predict_proba(X_test)
-    fold_acc= clf.score(X_test, Y_test)
+    fold_acc = clf.score(X_test, Y_test)
     print("accuracy: ", fold_acc)
-    acc.append(fold_acc)
-
     score = balanced_accuracy_score(Y_test, y_pred)
     # print(list(zip(y_pp, Y_test)))
     print("Balance accuracy %.3f" % score)
+    return score, fold_acc
+
+
+skf = StratifiedKFold(n_splits=2, shuffle=True)
+#tworzenie klasyfikatora
+clf = SVC(gamma='auto', probability=True)
+
+
+acc = []
+for i in range(5):
+    for train_index, test_index in skf.split(X, Y):
+        X_train, X_test = X[train_index], X[test_index]
+        Y_train, Y_test = Y[train_index], Y[test_index]
+        score, fold_acc = train_and_evaluate(X_train, Y_train)
+        acc.append(fold_acc)
+
+
 
 mean_acc = sum(acc)/len(acc)
 print("Średnia: ", mean_acc)
