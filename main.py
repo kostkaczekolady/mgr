@@ -7,11 +7,13 @@ X = np.load("inputs.npy")
 Y = np.load("labels.npy")
 Y = Y.flatten()
 
-
 skf= StratifiedKFold(n_splits=10)
 #tworzenie klasyfikatora
 
 clf = SVC(gamma='auto', probability=True)
+
+
+
 
 acc = []
 for train_index, test_index in skf.split(X, Y):

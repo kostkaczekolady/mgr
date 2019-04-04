@@ -2,44 +2,61 @@ import numpy as np
 from sklearn.svm import SVC
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import balanced_accuracy_score
+# from sklearn.exceptions import DataConversionWarning
+import warnings
+# warnings.filterwarnings(action='ignore', category=DataConversionWarning)
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+
+    X = np.load("inputs.npy")
+    Y = np.load("labels.npy")
+    Y = Y.flatten()
 
 
-X = np.load("inputs.npy")
-Y = np.load("labels.npy")
-Y = Y.flatten()
+    def train_and_evaluate (X_train, X_test, Y_train, Y_test):
+        #trenuje
+        clf.fit(X_train, Y_train)
+        #jak klasyfikator dziala na zbiorze testowym
+        y_pred = clf.predict(X_test)
+        y_pp = clf.predict_proba(X_test)
+        fold_acc = clf.score(X_test, Y_test)
+        # print("accuracy: ", fold_acc)
+        score = balanced_accuracy_score(Y_test, y_pred)
+        # print(list(zip(y_pp, Y_test)))
+        # print("Balance accuracy %.3f" % score)
+        return score, fold_acc
 
 
-def train_and_evaluate (X_train, Y_train):
-    #trenuje
-    clf.fit(X_train, Y_train)
-    #jak klasyfikator dziala na zbiorze testowym
-    y_pred = clf.predict(X_test)
-    y_pp = clf.predict_proba(X_test)
-    fold_acc = clf.score(X_test, Y_test)
-    print("accuracy: ", fold_acc)
-    score = balanced_accuracy_score(Y_test, y_pred)
-    # print(list(zip(y_pp, Y_test)))
-    print("Balance accuracy %.3f" % score)
-    return score, fold_acc
+    skf = StratifiedKFold(n_splits=2, shuffle=True)
 
 
-skf = StratifiedKFold(n_splits=2, shuffle=True)
-#tworzenie klasyfikatora
-clf = SVC(gamma='auto', probability=True)
+    def check_classifier (clf):
+        acc = []
+        for i in range(5):
+            for train_index, test_index in skf.split(X, Y):
+                X_train, X_test = X[train_index], X[test_index]
+                Y_train, Y_test = Y[train_index], Y[test_index]
+                score, fold_acc = train_and_evaluate(X_train, X_test, Y_train, Y_test)
+                acc.append(fold_acc)
+        return  sum(acc)/len(acc)
 
+    classifiers = []
+    classifiers_acc = []
+    for kernel in ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed']:
+        for C in [0.001, 0.01, 0.1, 1, 1.05]:
+            for gamma in [1, 2, 3]:
+                print(kernel, C, gamma)
+                # tworzenie klasyfikatora
+                clf = SVC(gamma=gamma, C=C, kernel=kernel, probability=True)
+                check_classifiers = check_classifier(clf)
+                # print("Średnia: ", check_classifiers)
+                classifiers.append((kernel,C,gamma))
+                classifiers_acc.append((check_classifiers))
+    classifiers_acc_np = np.array(classifiers_acc)
+    index = np.argmax(classifiers_acc_np)
+    print(classifiers[index])
+    print("koncowy wynik:", classifiers_acc[index])
 
-acc = []
-for i in range(5):
-    for train_index, test_index in skf.split(X, Y):
-        X_train, X_test = X[train_index], X[test_index]
-        Y_train, Y_test = Y[train_index], Y[test_index]
-        score, fold_acc = train_and_evaluate(X_train, Y_train)
-        acc.append(fold_acc)
-
-
-
-mean_acc = sum(acc)/len(acc)
-print("Średnia: ", mean_acc)
 
 
 
