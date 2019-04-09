@@ -7,13 +7,10 @@ X = np.load("inputs.npy")
 Y = np.load("labels.npy")
 Y = Y.flatten()
 
-skf= StratifiedKFold(n_splits=10)
+skf = StratifiedKFold(n_splits=10)
 #tworzenie klasyfikatora
 
 clf = SVC(gamma='auto', probability=True)
-
-
-
 
 acc = []
 for train_index, test_index in skf.split(X, Y):
@@ -49,7 +46,7 @@ print("Średnia: ", mean_acc)
 # score = balanced_accuracy_score(guitar_test_Y, y_pred)
 # print(list(zip(y_pp, guitar_test_Y)))
 # print("%.3f" % score)
-exit()
+# exit()
 
 
 # #trenujemy dla viola

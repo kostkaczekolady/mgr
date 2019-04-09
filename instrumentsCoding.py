@@ -4,11 +4,13 @@ from pydub import AudioSegment
 import re
 
 mypath = './smalldataset/'
+# mypath = './smalldatasetWav/'
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 
 data = []
 for f in onlyfiles:
     trimmed_name = re.sub("_\d+.mp3", "", re.sub("_\d+_", "+", f))
+    # trimmed_name = re.sub("_\d+.wav", "", re.sub("_\d+_", "+", f))
     # print("zmieniona nazwa", trimmed_name)
     if trimmed_name == 'guitar':
         data.append([1])
@@ -32,14 +34,22 @@ for f in onlyfiles:
         data.append([10])
     elif trimmed_name == 'guitar+clarinet':
         data.append([11])
-    elif trimmed_name == 'cello+clarinet+triangle':
+    elif trimmed_name == 'cello+triangle':
         data.append([12])
-    elif trimmed_name == 'cello+viola+triangle':
+    elif trimmed_name == 'clarinet+triangle':
         data.append([13])
-    elif trimmed_name == 'clarinet+guitar+triangle':
+    elif trimmed_name == 'guitar+triangle':
         data.append([14])
+    elif trimmed_name == 'triangle+viola':
+        data.append([15])
+    elif trimmed_name == 'cello+clarinet+triangle':
+        data.append([16])
+    elif trimmed_name == 'cello+viola+triangle':
+        data.append([17])
+    elif trimmed_name == 'clarinet+guitar+triangle':
+        data.append([18])
     else:
         data.append([0])
         print("Dziwny instr: ", trimmed_name)
 
-# print("zakodowane elementy bazy:", data)
+print("Elementy zakodowane!")

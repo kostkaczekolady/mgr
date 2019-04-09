@@ -2,7 +2,6 @@ import numpy as np
 import librosa.display
 from glob import glob
 import librosa as lr
-from pydub import AudioSegment
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 
@@ -16,16 +15,6 @@ def normalize(y):
     y = y / norma
     return y
 
-# def delete_silence():
-#
-# def convert_mp3_to_wav():
-#
-#     files = [f for f in listdir('./baza') if isfile(join('mp3/', f))]
-#     for file in files:
-#         print('Converting %s' % file)
-#         sound = AudioSegment.from_mp3("mp3/%s" % file)
-#         sound.export("wav/%s.wav" % file.split('.')[0], format="wav")
-
 def visualization(y, sr, xlabel, ylabel, title):
     plt.rcParams['figure.figsize'] = (14, 4)
     lr.display.waveplot(y, sr=sr)
@@ -35,7 +24,7 @@ def visualization(y, sr, xlabel, ylabel, title):
     # plt.show()
 
 def read_single_sxamples(path, filename):
-    y, sr = lr.load(path+filename, duration=0.5)
+    y, sr = lr.load(path+filename, duration=0.3)
     y = normalize(y)
     mfccs = librosa.feature.mfcc(y=y, sr=sr)
     new_mfccs = np.resize(mfccs, (mfccs.size))
@@ -67,5 +56,7 @@ def pca():
     matrix_extration = read_examples()
     pca = PCA(n_components=10)
     pcaArray = pca.fit_transform(matrix_extration)
-    print ("pca:", pcaArray.shape)
+    print("pca:", pcaArray.shape)
     return pcaArray
+
+print("Ekstrakcja zakończona :)")
