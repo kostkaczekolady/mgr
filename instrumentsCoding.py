@@ -50,6 +50,6 @@ for f in onlyfiles:
         data.append([18])
     else:
         data.append([0])
-        print("Dziwny instr: ", trimmed_name)
+        print("Nierozpoznany instr: ", trimmed_name)
 
 print("Elementy zakodowane!")

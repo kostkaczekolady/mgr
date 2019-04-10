@@ -44,13 +44,13 @@ with warnings.catch_warnings():
     classifiers_acc = []
 
     # for kernel in ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed']:
-    for kernel in ['linear']:
-    # for kernel in ['linear', 'rbf', 'sigmoid']:
+    # for kernel in ['linear']:
+    for kernel in ['linear', 'rbf', 'sigmoid']:
         # for C in [0.001, 0.01, 0.1, 1, 1.05]:
-        for C in [0.000001, 0.001, 1, 10, 50, 105, 110, 150, 170, 200]:
+        for C in [0.000001, 0.001, 1,  50, 105, 110, 150, 170, 200]:
             # for gamma in [1, 2, 3, 4, 5]:
-            for gamma in [1, 2, 3, 4]:
-            # for gamma in [1, 2, 3, 4, 4.5, 5, 5.5, 6, 6.5, 7, 8, 10]:
+            # for gamma in [1, 2, 3, 4]:
+            for gamma in [1, 3, 4, 4.5, 5, 5.5, 6, 6.5, 7, 8, 10]:
                 print(kernel, C, gamma)
                 # tworzenie klasyfikatora
                 clf = SVC(gamma=gamma, C=C, kernel=kernel, probability=True)

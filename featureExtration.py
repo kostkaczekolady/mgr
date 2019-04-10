@@ -41,12 +41,14 @@ def read_single_sxamples(path, filename):
 
 def read_examples():
     all_music_files = glob('./smalldataset' + '/*.mp3')
+    # all_music_files = glob('./smalldatasetWav' + '/*.wav')
     music_files_names = []
     list_samples = []
     for x in all_music_files:
         music_files_names.append(x[15:])
     for x in music_files_names:
         list_samples.append(read_single_sxamples('./smalldataset/', x))
+        # list_samples.append(read_single_sxamples('./smalldatasetWav/', x))
     matrix_extration = np.array(list_samples)
     return matrix_extration
 

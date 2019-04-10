@@ -1,6 +1,6 @@
 from pydub import AudioSegment
 
-path = './smalldataset'
+path = './smalldatasetWav'
 pathTriangles = './baza2'
 cello_01_clarinet_01 = AudioSegment.from_file("./smalldataset/cello_01_clarinet_01.mp3")
 cello_02_viola_01 = AudioSegment.from_file("./smalldataset/cello_02_viola_01.mp3")

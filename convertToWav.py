@@ -2,9 +2,7 @@ from os import listdir, remove
 from os.path import isfile, join
 from pydub import AudioSegment
 
-
-
-mypath = './baza/'
+mypath = './baza2/'
 # onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 
 
