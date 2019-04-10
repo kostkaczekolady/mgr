@@ -4,7 +4,8 @@ from pydub import AudioSegment
 import glob
 import os, fnmatch
 
-mypath = './baza/'
+# mypath = './baza/'
+mypath = './bazaMp3Skrocona/'
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 
 audio_segments = []
@@ -25,45 +26,9 @@ for as_idx, (file_name, audio_segment) in enumerate(audio_segments):
 
 for (file_name, audio_segment) in audio_segments_ovelayed:
     # print("wyeksportowane pliki do bazy:", file_name)
-    file_path = "./smalldataset/"
+    file_path = "./smalldatasetSkrocony/"
     # file_path = "./smalldatasetWav/"
     audio_segment.export(file_path + file_name + '.mp3', format='mp3')
     # audio_segment.export(file_path + file_name + '.wav', format='wav')
 
 print("Mix wykonany")
-
-
-#
-# path = './smalldataset'
-# pathTriangles = './baza2'
-# cello_01_clarinet_01 = AudioSegment.from_file("./smalldataset/cello_01_clarinet_01.mp3")
-# cello_02_viola_01 = AudioSegment.from_file("./smalldataset/cello_02_viola_01.mp3")
-# cello_01_viola_01 = AudioSegment.from_file("./smalldataset/cello_02_viola_01.mp3")
-# cello_03_viola_01 = AudioSegment.from_file("./smalldataset/cello_02_viola_01.mp3")
-# clarinet_01_guitar_02 = AudioSegment.from_file("./smalldataset/clarinet_01_guitar_02.mp3")
-#
-# triangle_1 = AudioSegment.from_file("./baza2/triangle_1.mp3")
-# triangle_2 = AudioSegment.from_file("./baza2/triangle_2.mp3")
-#
-# cello_01_clarinet_01_triangle_1 = cello_01_clarinet_01.overlay(triangle_1)
-# cello_02_viola_01_triangle_1 = cello_02_viola_01.overlay(triangle_1)
-# cello_01_viola_01_triangle_1 = cello_01_viola_01.overlay(triangle_1)
-# cello_03_viola_01_triangle_1 = cello_03_viola_01.overlay(triangle_1)
-# clarinet_01_guitar_02_triangle_1 = clarinet_01_guitar_02.overlay(triangle_1)
-# cello_01_clarinet_01_triangle_2 = cello_01_clarinet_01.overlay(triangle_2)
-# cello_02_viola_01_triangle_2 = cello_02_viola_01.overlay(triangle_2)
-# cello_01_viola_01_triangle_2 = cello_01_viola_01.overlay(triangle_2)
-# cello_03_viola_01_triangle_2 = cello_03_viola_01.overlay(triangle_2)
-# clarinet_01_guitar_02_triangle_2 = clarinet_01_guitar_02.overlay(triangle_2)
-#
-#
-# cello_01_clarinet_01_triangle_1.export("./smalldataset/cello_01_clarinet_01_triangle_1.mp3", format='mp3')
-# cello_02_viola_01_triangle_1.export("./smalldataset/cello_02_viola_01_triangle_1.mp3", format='mp3')
-# cello_01_viola_01_triangle_1.export("./smalldataset/cello_01_viola_01_triangle_1.mp3", format='mp3')
-# cello_03_viola_01_triangle_1.export("./smalldataset/cello_03_viola_01_triangle_1.mp3", format='mp3')
-# cello_01_clarinet_01_triangle_2.export("./smalldataset/cello_01_clarinet_01_triangle_2.mp3", format='mp3')
-# cello_02_viola_01_triangle_2.export("./smalldataset/cello_02_viola_01_triangle_2.mp3", format='mp3')
-# cello_01_viola_01_triangle_2.export("./smalldataset/cello_01_viola_01_triangle_2.mp3", format='mp3')
-# cello_03_viola_01_triangle_2.export("./smalldataset/cello_03_viola_01_triangle_2.mp3", format='mp3')
-# # clarinet_1_guitar_2_triangle_1.export("./smalldataset/clarinet_1_guitar_2_triangle_1.mp3", format='mp3')
-

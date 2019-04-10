@@ -6,7 +6,7 @@ from featureExtration import *
 read_examples()
 
 print("PCA w trakcie!")
-data_dir = './smalldataset'
+# data_dir = './smalldataset'
 # data_dir = './smalldatasetWaw'
 
 X = pca()

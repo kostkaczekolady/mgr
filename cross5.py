@@ -80,5 +80,4 @@ with warnings.catch_warnings():
 # score = balanced_accuracy_score(guitar_test_Y, y_pred)
 # print(list(zip(y_pp, guitar_test_Y)))
 # print("%.3f" % score)
-exit()
 

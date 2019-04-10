@@ -10,5 +10,9 @@ for f in onlyfiles:
    y, sr = librosa.load(mypath + f)
    yt, index = librosa.effects.trim(y)
    print(librosa.get_duration(y), librosa.get_duration(yt))
-   librosa.output.write_wav('./bazaWavSkrocona/'+f[:-3]+'wav', yt, sr)
+   # librosa.output.write_wav('./bazaWavSkrocona/'+f[:-3]+'wav', yt, sr)
+   librosa.output.write_wav('./bazaMp3Skrocona/'+f[:-3]+'mp3', yt, sr)
+
+
+print("Skracanie!")
 
