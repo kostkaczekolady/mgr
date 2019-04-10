@@ -42,7 +42,7 @@ with warnings.catch_warnings():
 
     classifiers = []
     classifiers_acc = []
-    for kernel in ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed']:
+    for kernel in ['linear', 'rbf', 'sigmoid']:
         for C in [0.001, 0.01, 0.1, 1, 1.05]:
             for gamma in [1, 2, 3]:
                 print(kernel, C, gamma)
