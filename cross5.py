@@ -12,9 +12,7 @@ with warnings.catch_warnings():
     X = np.load("inputs.npy")
     Y = np.load("labels.npy")
     Y = Y.flatten()
-
     print(X.shape)
-
 
 
     def train_and_evaluate (X_train, X_test, Y_train, Y_test, clf):
@@ -33,7 +31,6 @@ with warnings.catch_warnings():
         return score, fold_acc
 
     skf = StratifiedKFold(n_splits=2, shuffle=True)
-
 
     def check_classifier(clf):
         acc = []
@@ -75,6 +72,7 @@ with warnings.catch_warnings():
 
 
 
+
 #wyplute labelki przez klasyfiaktor
 # y_pred = clf.predict(guitar_test_X)
 #
@@ -86,4 +84,3 @@ with warnings.catch_warnings():
 # score = balanced_accuracy_score(guitar_test_Y, y_pred)
 # print(list(zip(y_pp, guitar_test_Y)))
 # print("%.3f" % score)
-

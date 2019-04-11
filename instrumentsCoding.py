@@ -3,7 +3,7 @@ from os.path import isfile, join
 from pydub import AudioSegment
 import re
 
-mypath = './smalldatasetskrocony/'
+mypath = './datasetskrocony/'
 # mypath = './smalldatasetWav/'
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 

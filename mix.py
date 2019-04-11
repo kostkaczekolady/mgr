@@ -23,7 +23,7 @@ for as_idx, (file_name, audio_segment) in enumerate(audio_segments):
 
 for (file_name, audio_segment) in audio_segments_ovelayed:
     # print("wyeksportowane pliki do bazy:", file_name)
-    file_path = "./smalldatasetskrocony/"
+    file_path = "./datasetskrocony/"
     # file_path = "./smalldatasetWav/"
     audio_segment.export(file_path + file_name + '.mp3', format='mp3')
     # audio_segment.export(file_path + file_name + '.wav', format='wav')
