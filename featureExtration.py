@@ -24,7 +24,9 @@ def visualization(y, sr, xlabel, ylabel, title):
     # plt.show()
 
 def read_single_sxamples(path, filename):
+    # y, sr = lr.load(path+filename)
     y, sr = lr.load(path+filename, duration=0.3)
+    print(librosa.get_duration(y), filename)
     y = normalize(y)
     mfccs = librosa.feature.mfcc(y=y, sr=sr)
     new_mfccs = np.resize(mfccs, (mfccs.size))
@@ -40,19 +42,18 @@ def read_single_sxamples(path, filename):
     return vector_mfccs_sfft
 
 def read_examples():
-    all_music_files = glob('./smalldataset' + '/*.mp3')
+    all_music_files = glob('./smalldatasetskrocony' + '/*.mp3')
     # all_music_files = glob('./smalldatasetWav' + '/*.wav')
     music_files_names = []
     list_samples = []
     for x in all_music_files:
         music_files_names.append(x[15:])
     for x in music_files_names:
-        list_samples.append(read_single_sxamples('./smalldataset/', x))
+        list_samples.append(read_single_sxamples('./smalldatasetskrocony/', x))
         # list_samples.append(read_single_sxamples('./smalldatasetWav/', x))
     matrix_extration = np.array(list_samples)
+    print(matrix_extration.shape)
     return matrix_extration
-
-
 
 def pca():
     matrix_extration = read_examples()
@@ -61,4 +62,4 @@ def pca():
     print("pca:", pcaArray.shape)
     return pcaArray
 
-print("Ekstrakcja zakończona :)")
+# print("Ekstrakcja zakończona :)")

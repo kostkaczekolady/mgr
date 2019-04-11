@@ -9,8 +9,9 @@ onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 for f in onlyfiles:
    y, sr = librosa.load(mypath + f)
    yt, index = librosa.effects.trim(y)
-   print(librosa.get_duration(y), librosa.get_duration(yt))
+   # print(librosa.get_duration(y), librosa.get_duration(yt), f)
    # librosa.output.write_wav('./bazaWavSkrocona/'+f[:-3]+'wav', yt, sr)
    librosa.output.write_wav('./bazaMp3Skrocona/'+f[:-3]+'mp3', yt, sr)
+
 
 print("Cisza usunięta, convert udany!")
