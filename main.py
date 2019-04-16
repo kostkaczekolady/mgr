@@ -16,7 +16,7 @@ Y = Y.flatten()
 skf = StratifiedKFold(n_splits=10)
 
 # clf = SVC(gamma='auto', probability=True)
-clf = KNeighborsClassifier(5)
+clf = KNeighborsClassifier(3)
 # clf = GaussianProcessClassifier(1.0 * RBF(1.0))
 
 acc = []
@@ -42,10 +42,10 @@ print("y:", Y, " X: ", clf.predict(X), "liczba elementów", np.bincount(Y))
 np.set_printoptions(precision=2)
 
 plt.figure(figsize=(10, 10))
-plot_confusion_matrix(cnf_matrix, classes=['guitar', 'viola', 'cello', 'clarinet', 'cello+clarinet', 'cello+guitar', 'cello+viola', 'clarinet+guitar', 'clarinet+viola', 'guitar+viola', 'guitar+clarinet'],
+plot_confusion_matrix(cnf_matrix, classes=['guitar', 'viola', 'cello', 'clarinet', 'cello+clarinet', 'cello+guitar', 'cello+viola', 'clarinet+guitar', 'clarinet+viola', 'guitar+viola'],
                       title='Confusion matrix ')
 
-plt.savefig('cnf_matrix/confusion_matrix1.png')
+plt.savefig('cnf_matrix/confusion_matrix_max_2_instr.png')
 plt.close()
 
 # plt.show()

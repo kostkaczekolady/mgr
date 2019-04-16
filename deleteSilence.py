@@ -2,7 +2,8 @@ from os import listdir
 from os.path import isfile, join
 import librosa
 
-mypath = './baza/'
+# mypath = './baza/'
+mypath = './baza_triangle/'
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 # print("pliki", onlyfiles)
 
@@ -11,7 +12,7 @@ for f in onlyfiles:
    yt, index = librosa.effects.trim(y)
    # print(librosa.get_duration(y), librosa.get_duration(yt), f)
    # librosa.output.write_wav('./bazaWavSkrocona/'+f[:-3]+'wav', yt, sr)
-   librosa.output.write_wav('./bazaMp3Skrocona/'+f[:-3]+'mp3', yt, sr)
+   librosa.output.write_wav('./baza_triangle/'+f[:-3]+'mp3', yt, sr)
 
 
 print("Cisza usunięta, convert udany!")

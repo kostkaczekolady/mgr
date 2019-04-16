@@ -42,14 +42,17 @@ def read_single_sxamples(path, filename):
     return vector_mfccs_sfft
 
 def read_examples():
-    all_music_files = glob('./datasetskrocony' + '/*.mp3')
+    # all_music_files = glob('./datasetskrocony' + '/*.mp3')
+    all_music_files = glob('./test10' + '/*.mp3')
     # all_music_files = glob('./smalldatasetWav' + '/*.wav')
     music_files_names = []
     list_samples = []
     for x in all_music_files:
-        music_files_names.append(x[18:])
+        music_files_names.append(x[9:])
+        # music_files_names.append(x[18:])
     for x in music_files_names:
-        list_samples.append(read_single_sxamples('./datasetskrocony/', x))
+        # list_samples.append(read_single_sxamples('./datasetskrocony/', x))
+        list_samples.append(read_single_sxamples('./test10/', x))
         # list_samples.append(read_single_sxamples('./smalldatasetWav/', x))
     matrix_extration = np.array(list_samples)
     print(matrix_extration.shape)
