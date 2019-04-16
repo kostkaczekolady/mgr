@@ -16,9 +16,7 @@ with warnings.catch_warnings():
 
 
     def train_and_evaluate (X_train, X_test, Y_train, Y_test, clf):
-        #trenuje
         clf.fit(X_train, Y_train)
-        #jak klasyfikator dziala na zbiorze testowym
         y_pred = clf.predict(X_test)
         y_pp = clf.predict_proba(X_test)
         fold_acc = clf.score(X_test, Y_test)

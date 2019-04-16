@@ -26,7 +26,7 @@ def visualization(y, sr, xlabel, ylabel, title):
 def read_single_sxamples(path, filename):
     # y, sr = lr.load(path+filename)
     y, sr = lr.load(path+filename, duration=0.3)
-    print(librosa.get_duration(y), filename)
+    # print(librosa.get_duration(y), filename)
     y = normalize(y)
     mfccs = librosa.feature.mfcc(y=y, sr=sr)
     new_mfccs = np.resize(mfccs, (mfccs.size))
