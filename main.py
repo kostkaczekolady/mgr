@@ -15,7 +15,7 @@ skf = StratifiedKFold(n_splits=10)
 #tworzenie klasyfikatora
 
 # clf = SVC(gamma='auto', probability=True)
-clf = KNeighborsClassifier(4)
+clf = KNeighborsClassifier(5)
 # clf = GaussianProcessClassifier(1.0 * RBF(1.0))
 
 acc = []

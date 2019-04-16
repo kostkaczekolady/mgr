@@ -61,9 +61,9 @@ with warnings.catch_warnings():
     #   print(classifiers[index])
     #   print("koncowy wynik: ", classifiers_acc[index])
 
-    #działa?
+
     # clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes = (15, 2), random_state = 1)
-    clf = KNeighborsClassifier(4)
+    clf = KNeighborsClassifier(5)
     # clf = SVC(gamma='auto', probability=True)
     check_classifiers = check_classifier(clf)
     print("Średnia: ", check_classifiers)
