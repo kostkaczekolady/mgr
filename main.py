@@ -48,7 +48,7 @@ plt.figure(figsize=(20, 15))
 plot_confusion_matrix(cnf_matrix, classes=['guitar', 'viola', 'cello', 'clarinet', 'guitar+trumpet', 'viola+trumpet', 'cello+trumpet', 'clarinet+trumpet', 'cello+clarinet+trumpet', 'cello+guitar+trumpet', 'cello+viola+trumpet', 'clarinet+guitar+trumpet', 'clarinet+viola+trumpet', 'guitar+viola+trumpet'],
                       title='Confusion matrix')
 
-plt.savefig('cnf_matrix/confusion_matrix_3_instruments+S_10CVK1.png')
+plt.savefig('cnf_matrix/confusion_matrix_3_instruments_10CVK1.png')
 plt.close()
 
 # plt.show()
