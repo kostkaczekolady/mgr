@@ -1,5 +1,6 @@
 # from coding2instruments import *
-from coding.coding3instruments import *
+# from coding.coding3instruments import *
+from codingBinary.codingBinary2instruments import *
 from featureExtration import *
 
 #Wczytywanie zbiorow
@@ -15,7 +16,7 @@ Y = np.array(data)
 # np.save("inputs.npy", X)
 # np.save("labels.npy", Y)
 
-np.save("inputs3.npy", X)
-np.save("labels3.npy", Y)
+np.save("inputs2.npy", X)
+np.save("labels2.npy", Y)
 
 print("PCA gotowe!")

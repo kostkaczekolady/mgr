@@ -10,9 +10,13 @@ from cnf_matrix import *
 
 # X = np.load("inputs.npy")
 # Y = np.load("labels.npy")
+#
+# X = np.load("inputs3.npy")
+# Y = np.load("labels3.npy")
+#
+X = np.load("inputs2.npy")
+Y = np.load("labels2.npy")
 
-X = np.load("inputs3.npy")
-Y = np.load("labels3.npy")
 Y = Y.flatten()
 
 skf = StratifiedKFold(n_splits=10)
@@ -48,7 +52,7 @@ plt.figure(figsize=(20, 15))
 plot_confusion_matrix(cnf_matrix, classes=['guitar', 'viola', 'cello', 'clarinet', 'guitar+trumpet', 'viola+trumpet', 'cello+trumpet', 'clarinet+trumpet', 'cello+clarinet+trumpet', 'cello+guitar+trumpet', 'cello+viola+trumpet', 'clarinet+guitar+trumpet', 'clarinet+viola+trumpet', 'guitar+viola+trumpet'],
                       title='Confusion matrix')
 
-plt.savefig('cnf_matrix/confusion_matrix_3_instruments_10CVK1.png')
+plt.savefig('cnf_matrix/confusion_matrix_3_instruments_10CVK1_test.png')
 plt.close()
 
 # plt.show()
