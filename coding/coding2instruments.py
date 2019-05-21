@@ -5,12 +5,12 @@ import re
 
 mypath = './dataset-2-instruments/'
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+print("onlyfiles: ", len(onlyfiles))
+
 
 data = []
 for f in onlyfiles:
-    # trimmed_name = re.sub(".mp3", "", re.sub("_\d+_", "+", f))
     trimmed_name = re.sub("_\d+.mp3", "", re.sub("_\d+_", "+", f))
-    # print("zmieniona nazwa: ", trimmed_name)
     if trimmed_name == 'guitar':
         data.append([1])
     elif trimmed_name == 'viola':

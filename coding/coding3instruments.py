@@ -5,6 +5,8 @@ import re
 
 mypath = './dataset-3-instruments/'
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+print("onlyfiles: ", len(onlyfiles))
+
 
 data = []
 for f in onlyfiles:
